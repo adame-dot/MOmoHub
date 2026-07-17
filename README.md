@@ -7,7 +7,7 @@
 ## 🌟 Key Features
 
 ### 1. 💳 Seamless Core Payment API
-* **Omnichannel Integration:** One-click integration endpoints for MTN MoMo, Airtel Money, and local African payment gateways.
+* **Omnichannel Integration:** One-click integration endpoints for Mobile Money, and local African payment gateways.
 * **Instant Webhooks:** Real-time transaction notifications and automated database state synchronization upon successful payment.
 
 ### 2. 📉 Automated Debt Recovery System
