@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMOHUB - Customers & Chat</title>
+    <style>
+        /* CSS Y'URUPAPURO RWA CUSTOMERS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: rgb(10, 25, 47);
+            color: var(--text-white);
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            color: #FFCC00;
+            font-size: 26px;
+        }
+
+        /* Udusanduku tw'imibare (Summary Cards) */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #071324;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid #1a237e;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            color:white;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e0e1e9;
+        }
+
+        /* ABAKIRIYA B'IMENA (TOP CUSTOMERS) */
+        .top-customers-section {
+            background: rgba(0,0,0,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .top-customers-section h3 {
+            color: #ff9800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .top-customer-card {
+            background: #fffde7;
+            border: 1px solid #fff59d;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge-loyal {
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* IMBONERAHAMWE Y'ABAKIRIYA BOSE */
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        .customers-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .customers-table th {
+            background-color: #1a237e;
+            color: white;
+            padding: 15px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .customers-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+        }
+
+        .customers-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.active {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .btn-action {
+            background: #1a237e;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-action:hover {
+            background: #0d1342;
+        }
+
+        /* AGASANDUKU K'IBIGANIZO (CHAT BOX) */
+        .chat-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 10000;
+            border: 1px solid #1a237e;
+        }
+
+        .chat-header {
+            background: #1a237e;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            background: #f8f9fa;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .msg.sent {
+            background: #1a237e;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .msg.received {
+            background: #e0e0e0;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .chat-footer button {
+            background: #1a237e;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            margin-left: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <h2>IbyakozweAbakiriya (Customers)</h2>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Abakiriya Bose</h3>
+                <p id="total-cust">0</p>
+            </div>
+            <div class="card">
+                <h3>Abakunda Gura (VIP)</h3>
+                <p id="top-cust-count">0</p>
+            </div>
+        </div>
+
+        <!-- SECTION Y'ABAKIRIYA B'IMENA -->
+        <div class="top-customers-section">
+            <h3>⭐ Abakiriya b'Imena (Top Buyers)</h3>
+            <div class="top-grid" id="top-customers-list">
+                <!-- Hano hazajya VIPs zivuye muri Database horeshejwe JS -->
+            </div>
+        </div>
+
+        <!-- IMBONERAHAMWE Y'ABAKIRIYA BOSE -->
+        <div class="table-container">
+            <table class="customers-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Izina</th>
+                        <th>Nomero (MoMo)</th>
+                        <th>Imeli</th>
+                        <th>Umubare w'Inshuro</th>
+                        <th>Status</th>
+                        <th>Ibikorwa</th>
+                    </tr>
+                </thead>
+                <tbody id="all-customers-list">
+                    <!-- Hano imirongo izizana ku buryo bwikora -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- AGASANDUKU KA CHAT -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <span id="chatCustomerName">Ubutumwa</span>
+            <span onclick="fungaChat()" style="cursor:pointer;">&times;</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Ubutumwa buzajya buza hano bukowe mu kigega -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Andika ubutumwa..." onkeypress="checkEnter(event)">
+            <button onclick="oherezaUbutumwa()">Send</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT (IMIKORERE YIKORA) -->
+    <script>
+        const topCustomersList = document.getElementById("top-customers-list");
+        const allCustomersList = document.getElementById("all-customers-list");
+        const chatBox = document.getElementById("chatBox");
+        const chatCustomerName = document.getElementById("chatCustomerName");
+        const chatMessages = document.getElementById("chatMessages");
+        const chatInput = document.getElementById("chatInput");
+        
+        let umukiriyaUriGushyikirana = "";
+
+        // ==============================================================
+        // 1. KUZANA ABAKIRIYA BOSE KURI DATABASE (FETCH FROM PHP/SQL)
+        // ==============================================================
+        function zanaAbakiriyaKuriDatabase() {
+            /* 
+               HANO HAZAJYA PHP:
+               fetch('get_customers.php')
+               .then(response => response.json())
+               .then(customers => {
+            */
+            
+            // Iyi ni ifomu y'uburyo data izaba imeze ikimara kuza (Urugero):
+            const customers = []; // Hano hazaba harimo 'customers' zivuye kuri database.
+            
+            let topCount = 0;
+            document.getElementById("total-cust").textContent = customers.length;
+            allCustomersList.innerHTML = "";
+            topCustomersList.innerHTML = "";
+
+            customers.forEach(customer => {
+                // Kwerekana VIP niba agura cyane (Urugero: inshuro >= 40)
+                if(customer.purchase_count >= 40) {
+                    topCount++;
+                    const topCard = document.createElement("div");
+                    topCard.className = "top-customer-card";
+                    topCard.innerHTML = `
+                        <div>
+                            <h4>${customer.name}</h4>
+                            <p>Inshuro: <b>${customer.purchase_count} purchases</b></p>
+                        </div>
+                        <span class="badge-loyal">⭐ VIP</span>
+                    `;
+                    topCustomersList.appendChild(topCard);
+                }
+
+                // Gushyira abakiriya bose mu mbonerahamwe
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${customer.id}</td>
+                    <td>${customer.name} ${customer.purchase_count >= 40 ? '⭐' : ''}</td>
+                    <td>${customer.phone}</td>
+                    <td>${customer.email}</td>
+                    <td><b>${customer.purchase_count}</b></td>
+                    <td><span class="status active">${customer.status}</span></td>
+                    <td><button class="btn-action" onclick="funguraChat('${customer.name}')">Chat 💬</button></td>
+                `;
+                allCustomersList.appendChild(row);
+            });
+
+            document.getElementById("top-cust-count").textContent = topCount;
+            
+            /* 
+               }) // Hano ni iherezo rya fetch
+            */
+        }
+
+        // Guhita ihamagarwa iyo urupapuro rurimo gufunguka
+        window.onload = zanaAbakiriyaKuriDatabase;
+
+
+        // ==============================================================
+        // 2. IMIKORERE YA CHAT BOX (FETCH & POST TO PHP/SQL)
+        // ==============================================================
+        function funguraChat(customerName) {
+            chatBox.style.display = "flex";
+            chatCustomerName.textContent = "Chat na: " + customerName;
+            umukiriyaUriGushyikirana = customerName;
+            chatMessages.innerHTML = ""; // Gusiba ibya kera
+
+            /*
+               HANO HAZAJYA PHP/SQL: (Kuzana history y'ubutumwa mwandikiranye)
+               fetch('get_chat_history.php?customer=' + customerName)
+               .then(res => res.json())
+               .then(messages => {
+                   messages.forEach(msg => {
+                       // Gushyira ubutumwa bwose mu gasanduku (sent cyangwa received)
+                   });
+               });
+            */
+        }
+
+        function fungaChat() { 
+            chatBox.style.display = "none"; 
+        }
+
+        function oherezaUbutumwa() {
+            const text = chatInput.value.trim();
+            if (text === "") return;
+
+            // Guhita twerekana ubutumwa mwanditse ku muryango (UI)
+            const newMsg = document.createElement("div");
+            newMsg.className = "msg sent";
+            newMsg.textContent = text;
+            chatMessages.appendChild(newMsg);
+            chatInput.value = "";
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            /*
+               HANO HAZAJYA PHP/SQL: (Kohereza ubutumwa bushya muri Database)
+               fetch('send_message.php', {
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify({ customer: umukiriyaUriGushyikirana, message: text })
+               });
+            */
+        }
+
+        function checkEnter(event) { 
+            if (event.key === "Enter") oherezaUbutumwa(); 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMOHUB - Igenamiterere (Settings)</title>
+    <!-- Font na Icons zigezweho -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #111827;
+            --bg-input: #0b0f19;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --color-primary: #3b82f6;
+            --color-accent: #f59e0b;
+            --color-success: #10b981;
+            --border-color: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            padding: 40px 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .settings-container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* --- TOP HEADER & ACTIONS --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        .header-section h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .header-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* --- SETTINGS GRID --- */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .top-actions { width: 100%; }
+            .settings-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #2d3748;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-primary);
+        }
+
+        .card-title i {
+            color: var(--color-primary);
+            font-size: 18px;
+        }
+
+        /* --- FORMS & INPUTS --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4b5563;
+        }
+
+        .form-control, select {
+            width: 100%;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 14px 14px 44px;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .form-control:focus, select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        /* --- PASSWORD STRENGTH INDICATOR --- */
+        .strength-meter {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .strength-bar {
+            height: 4px;
+            flex: 1;
+            background-color: var(--border-color);
+            border-radius: 2px;
+        }
+        .strength-bar.active {
+            background-color: var(--color-success);
+        }
+
+        /* --- TOGGLE SWITCH --- */
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .toggle-group:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .toggle-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input { display: none; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #374151;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--color-primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* --- MODERN DEVICE LOGS --- */
+        .device-log {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--bg-input);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-top: 12px;
+        }
+        .device-log i { font-size: 20px; color: var(--text-secondary); }
+        .device-status { font-size: 12px; color: var(--color-success); font-weight: 500; }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #000000;
+            font-weight: 600;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e08e06;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 14px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-action {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            border-color: #4b5563;
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="settings-container">
+        
+        <!-- TOP BAR: HEADER & SAVE BUTTON -->
+        <div class="top-bar">
+            <div class="header-section">
+                <h1>MOMOHUB Settings</h1>
+                <p>Cunga konti yako, umutekano, imenyekanisha n'uburyo bwo kwakira amafaranga.</p>
+            </div>
+            <div class="top-actions">
+                <button type="button" class="btn-secondary">Discard</button>
+                <button type="button" onclick="saveAllSettings()" class="btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i> Save All Settings
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-grid">
+            
+            <!-- 1. PROFILE & ACCOUNT SETTINGS WITH WALLET KEY -->
+            <div class="card">
+                <div>
+                    <div class="card-title"><i class="fa-solid fa-user-circle"></i> Imyirondoro ya Konti</div>
+                    <div class="form-group">
+                        <label>Izina ry'Ubucuruzi / Umukoresha</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <input type="text" class="form-control" value="MOMOHUB VIP Ltd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Adiresi</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" class="form-control" value="info@momohub.rw">
+                        </div>
+                    </div>
+                    
+                    <!-- Wallet Key Section -->
+                    <div class="form-group">
+                        <label>Konti ID / Wallet Key</label>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <div class="input-wrapper" style="flex: 1;">
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" id="walletKey" class="form-control" value="MH-893X-492L-9902" readonly>
+                            </div>
+                            <button type="button" onclick="toggleWalletKey()" class="btn-action" title="Guhisha / Kureba">
+                                <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                            </button>
+                            <button type="button" onclick="copyWalletKey()" class="btn-action" title="Kopiye Key">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SECURITY & PRIVACY WITH STRENGTH METER -->
+            <div class="card">
+                <div>
+                    <div class="card-title"><i class="fa-solid fa-shield-halved"></i> Umutekano (Security)</div>
+                    <div class="form-group">
+                        <label>Umubare w'ibanga uriho (Current Password)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" class="form-control" placeholder="••••••••">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Umubare w'ibanga mushya (New Password)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" class="form-control" placeholder="••••••••">
+                        </div>
+                        <!-- Strength Indicator -->
+                        <div class="strength-meter">
+                            <div class="strength-bar active"></div>
+                            <div class="strength-bar active"></div>
+                            <div class="strength-bar active"></div>
+                            <div class="strength-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 12px;">
+                    <button type="button" class="btn-secondary" style="width: 100%; text-align: center;"><i class="fa-solid fa-shield"></i> Fungura 2FA Authentication</button>
+                </div>
+            </div>
+
+            <!-- 3. PAYMENT & GATEWAY SETUP -->
+            <div class="card">
+                <div>
+                    <div class="card-title"><i class="fa-solid fa-credit-card"></i> Payment Channels & Limits</div>
+                    <div class="form-group">
+                        <label>Nimero y'ibanze ya MoMo</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="text" class="form-control" value="0788XXXXXX">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Umubare Ntarengwa ku munsi (Daily Limit RWF)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            <input type="number" class="form-control" value="5000000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. TEAM / USER MANAGEMENT -->
+            <div class="card">
+                <div>
+                    <div class="card-title"><i class="fa-solid fa-users-gear"></i> Abakozi & Uburenganzira</div>
+                    <div class="form-group">
+                        <label>Uruhare rw'Umukoresha (Role)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user-tag"></i>
+                            <select>
+                                <option value="admin">Admin (Uburenganzira bwose)</option>
+                                <option value="manager">Manager</option>
+                                <option value="agent">Agent / Cashier</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ongeramo undi mukozi (Email)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <input type="email" class="form-control" placeholder="izina@ubucuruzi.rw">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. NOTIFICATIONS -->
+            <div class="card">
+                <div>
+                    <div class="card-title"><i class="fa-solid fa-bell"></i> Imenyekanisha (Notifications)</div>
+                    
+                    <div class="toggle-group">
+                        <div class="toggle-info">
+                            <h4>SMS Alerts</h4>
+                            <p>Kwizera ubutumwa iyo amafaranga yinjiye.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-group">
+                        <div class="toggle-info">
+                            <h4>Email Alerts</h4>
+                            <p>Raporo za buri munsi na buri kwezi muri Email.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. SYSTEM PREFERENCES & DEVICES (GEZWEHO) -->
+            <div class="card">
+                <div>
+                    <div class="card-title"><i class="fa-solid fa-sliders"></i> Ibyo Uhitamo & Ibikoresho</div>
+                    <div class="form-group">
+                        <label>Ururimi Rwa Sisitemu (Language)</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-language"></i>
+                            <select>
+                                <option value="rw">Ikinyarwanda</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Connected device (Igice gishya kigezweho) -->
+                    <label style="font-size: 12px; font-weight: 600; color: var(--text-secondary);">Igikoresho uri gukoresha</label>
+                    <div class="device-log">
+                        <i class="fa-solid fa-laptop"></i>
+                        <div>
+                            <h5 style="font-size: 13px; font-weight: 500;">Chrome on Windows (Kigali, RW)</h5>
+                            <span class="device-status">Ibice bikoreshwa ubu (Active now)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ACTIONS -->
+    <script>
+        function toggleWalletKey() {
+            const keyInput = document.getElementById('walletKey');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (keyInput.type === 'password') {
+                keyInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                keyInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        function copyWalletKey() {
+            const keyInput = document.getElementById('walletKey');
+            navigator.clipboard.writeText(keyInput.value);
+            alert('Wallet Key yakopiwe neza!');
+        }
+
+        function saveAllSettings() {
+            // Aha ni ho ubuhamya/backend ifatira
+            alert('Igenamiterere ryose (All Settings) ryabitswe neza!');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MomoHub | Ubucuruzi Bwawe, Uburyo Bwiza</title>
+    <style>
+        /* CSS YOSE IRI HANO */
+        :root {
+            --primary: #0a192f;
+            --secondary: #112240;
+            --accent: #FFC107;
+            --white: #ffffff;
+            --text-gray: #8892b0;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--primary); color: var(--white); margin: 0; padding: 0; }
+
+        .navbar { display: flex; justify-content: space-between; padding: 25px 8%; align-items: center; }
+        .logo { font-size: 26px; font-weight: 800; color: var(--accent); letter-spacing: 1px; }
+        .nav-btns button { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); margin-right: 15px; }
+        .btn-fill { background: var(--accent); border: none; color: var(--primary); }
+
+        .hero { display: flex; align-items: center; justify-content: space-between; padding: 80px 8%; height: 60vh; }
+        .hero-content { max-width: 50%; }
+        .hero-content h1 { font-size: 52px; line-height: 1.1; margin-bottom: 20px; }
+        .hero-content span { color: var(--accent); }
+        .hero-content p { color: var(--text-gray); font-size: 18px; margin-bottom: 30px; }
+
+        .btn-main { background: var(--accent); color: var(--primary); padding: 18px 35px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2); }
+
+        .feature-card { background: var(--secondary); padding: 30px; border-radius: 15px; width: 300px; border-left: 5px solid var(--accent); }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: var(--white); color: var(--primary); padding: 40px; border-radius: 20px; width: 320px; text-align: center; }
+        .modal-content input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">MOMO HUB</div>
+        <div class="nav-btns">
+            <button class="btn-outline" onclick="toggleModal()">Injira</button>
+            <button class="btn-fill">Iyandikishe</button>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Yobora ubucuruzi bwawe <span>kuburyo bwikora</span></h1>
+            <p>Genzura amafaranga yawe, ubibike, kandi wishyure serivisi zose uciye ku murongo umwe. Byihuse, byizewe, kandi 24/7.</p>
+            <button class="btn-main" onclick="toggleModal()">Tangira Gukoresha</button>
+        </div>
+        <div class="feature-card">
+            <h3>Ibyiza bya MomoHub</h3>
+            <p>✓ Instant Receipt</p>
+            <p>✓ Automated Reports</p>
+            <p>✓ Secure 24/7 Availability</p>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-top: 0;">Karibu</h2>
+            <input type="text" placeholder="Izina ry'ubukoresha">
+            <input type="password" placeholder="Ijambobanga">
+            <button class="btn-main" style="width: 100%; margin-top: 10px;">Emeza</button>
+            <p style="cursor: pointer; color: var(--text-gray);" onclick="toggleModal()">Funga</p>
+        </div>
+    </div>
+<div id="registerform" class="modal">
+    <div class="modal-content">
+        <h2 style="margin: top;"">fungura konti nmshya</h2>
+        <form class="legister" action="save.php"methode="POST">
+            <label for="name">izina</label>
+            <input type="text" id="name" name="name" placehoder="amazina yombi">
+        </form>
+    </div>
+</div>
+    <script>
+        // JAVASCRIPT ya login model
+        function toggleModal() {
+            const modal = document.getElementById('loginModal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

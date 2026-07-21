@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMOHUB - Premium FinTech Experience</title>
+    <!-- Kuzana imyandiko igezweho ya Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Amabara y'Ubururu bwijimye n'ay'Igiciro (Premium Palette) */
+            --navy-dark: #091124;
+            --navy-deep: #0f1a36;
+            --navy-card: #172649;
+            --navy-light: #233763;
+            --gold: #f59e0b;
+            --gold-glow: #d97706;
+            --emerald: #10b981;
+            --slate-blue: #94a3b8;
+            --text-light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--navy-dark);
+            color: var(--text-light);
+            padding: 25px 20px;
+            font-size: 15px;
+            background-image: radial-gradient(circle at 80% 10%, rgba(35, 55, 99, 0.3) 0%, transparent 50%),
+                              radial-gradient(circle at 10% 90%, rgba(245, 158, 11, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        /* PREMIUM HEADER */
+        .bank-header {
+            background: var(--navy-deep);
+            padding: 22px 30px;
+            border-radius: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bank-logo-area h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-light);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bank-logo-area h1 span.logo-bolt {
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .bank-logo-area p {
+            font-size: 11px;
+            color: var(--slate-blue);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .user-profile-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .user-avatar {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-dark) 100%);
+            color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info strong {
+            display: block;
+            color: var(--text-light);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .user-info span {
+            font-size: 12px;
+            color: var(--emerald);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+
+        .user-info span::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--emerald);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--emerald);
+        }
+
+        /* MAIN LAYOUT GRID */
+        .bank-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .bank-grid { grid-template-columns: 1fr; }
+        }
+
+        /* LEFT PANEL: ACCOUNT & ACCORDION CARD */
+        .account-summary {
+            background: var(--navy-deep);
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .account-number-title {
+            font-size: 11px;
+            color: var(--slate-blue);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .account-id-display {
+            font-family: monospace;
+            font-size: 18px;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-top: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 16px;
+            border-radius: 12px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            letter-spacing: 0.5px;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            color: var(--slate-blue);
+            margin-top: 15px;
+            display: block;
+        }
+
+        .balance-amount {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text-light);
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, var(--slate-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* GLASSMORPHIC LUXURY CREDIT CARD */
+        .bank-debit-card {
+            background: linear-gradient(135deg, rgba(35, 55, 99, 0.7) 0%, rgba(15, 26, 54, 0.9) 100%);
+            border-radius: 24px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .bank-debit-card::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .card-brand {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+        }
+
+        .card-chip {
+            width: 44px;
+            height: 32px;
+            background: linear-gradient(135deg, #fed7aa, #f59e0b);
+            border-radius: 6px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .card-num-text {
+            font-size: 21px;
+            letter-spacing: 3.5px;
+            font-family: monospace;
+            margin: 30px 0 20px 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .card-holder-info p {
+            font-size: 10px;
+            color: var(--slate-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-holder-info strong {
+            font-size: 14px;
+            display: block;
+            margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .card-type-indicator {
+            display: flex;
+            gap: -8px;
+        }
+        .card-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+        }
+        .card-circle-2 {
+            margin-left: -12px;
+            background: rgba(245, 158, 11, 0.4);
+        }
+
+        /* RIGHT PANEL: PAYMENT INTERFACE */
+        .bank-actions-box {
+            background: var(--navy-deep);
+            padding: 30px;
+            border-radius: 28px;
+            border: 1.5px solid var(--navy-light);
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* NEUMORPHIC DIRECTION CHIPS */
+        .action-toggle {
+            display: flex;
+            background: var(--navy-dark);
+            padding: 6px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .action-chip {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--slate-blue);
+            transition: all 0.3s ease;
+        }
+
+        .action-chip.active-send {
+            background: var(--navy-light);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .action-chip.active-receive {
+            background: var(--emerald);
+            color: var(--navy-dark);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* CHANNELS GRID */
+        .payment-type-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .method-card {
+            border: 1.5px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .method-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .method-card.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, var(--navy-card) 0%, var(--navy-light) 100%);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.1);
+        }
+
+        .method-card .icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .method-card .label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.3px;
+        }
+
+        /* FORMS CONTROL */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--slate-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .form-group input {
+            padding: 14px 18px;
+            border: 1.5px solid var(--navy-light);
+            border-radius: 14px;
+            font-size: 14px;
+            outline: none;
+            background: var(--navy-dark);
+            transition: all 0.25s;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .form-group input:focus {
+            border-color: var(--gold);
+            background: var(--navy-dark);
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+        }
+
+        /* PRIMARY CTA BUTTON */
+        .btn-bank {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-glow) 100%);
+            color: var(--navy-dark);
+            border: none;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
+        }
+
+        .btn-bank:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+        }
+
+        .btn-bank:active {
+            transform: translateY(0);
+        }
+
+        /* BOTTOM TRANSACTION BOX */
+        .statement-box {
+            background: var(--navy-deep);
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .statement-box h3 {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .bank-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .bank-table th {
+            color: var(--slate-blue);
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--navy-light);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .bank-table td {
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .no-data {
+            text-align: center;
+            color: var(--slate-blue);
+            padding: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- TOP APP BAR -->
+        <header class="bank-header">
+            <div class="bank-logo-area">
+                <h1><span class="logo-bolt">⚡</span> MOMOHUB</h1>
+                <p>Next-Gen Digital Finance</p>
+            </div>
+            <div class="user-profile-box">
+                <div class="user-info">
+                    <!-- Izina rizashyirwaho na Backend -->
+                    <strong id="userNameField">-- --</strong>
+                    <span>Konti Isanzwe</span>
+                </div>
+                <div class="user-avatar" id="userAvatarField">M</div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD BODY GRID -->
+        <div class="bank-grid">
+            
+            <!-- ACCOUNTS BALANCES (LEFT) -->
+            <div class="account-summary">
+                <div>
+                    <span class="account-number-title">Konti ID / Wallet Key</span>
+                    <div>
+                        <span class="account-id-display" id="bankIdField">--------</span>
+                    </div>
+                    
+                    <span class="balance-label">Amafaranga Ahari (Available Balance)</span>
+                    <div class="balance-amount" id="balanceField">0 RWF</div>
+                </div>
+
+                <!-- LUXURY PLASTIC CARD LOOK -->
+                <div class="bank-debit-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="card-brand">MOMOHUB VIP</span>
+                        <span style="font-size: 10px; font-weight: 800; opacity: 0.5; letter-spacing: 1px;">METALLIC</span>
+                    </div>
+                    <div class="card-chip"></div>
+                    <div class="card-num-text">•••• •••• •••• ••••</div>
+                    <div class="card-footer">
+                        <div class="card-holder-info">
+                            <p>CARD HOLDER</p>
+                            <strong id="cardHolderField">---- ----</strong>
+                        </div>
+                        <div class="card-type-indicator">
+                            <div class="card-circle"></div>
+                            <div class="card-circle card-circle-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE MODERN TRANSACT ENGINE (RIGHT) -->
+            <div class="bank-actions-box" id="payEngineBox">
+                
+                <!-- TOGGLE CHIPS -->
+                <div class="action-toggle">
+                    <div class="action-chip active-send" id="chipSend" onclick="toggleDirection('send')">Ohereza</div>
+                    <div class="action-chip" id="chipReceive" onclick="toggleDirection('receive')">Akira</div>
+                </div>
+
+                <form onsubmit="event.preventDefault(); alert('Igikorwa cyatangiye gutunganywa...');">
+                    
+                    <!-- CHANNELS SELECTION -->
+                    <div class="form-group">
+                        <label id="channelLabel">Hitamo Inzira (Payment Channel)</label>
+                        <div class="payment-type-group">
+                            <div class="method-card selected" id="methodMomo" onclick="selectMethod('momo')">
+                                <span class="icon">📱</span>
+                                <span class="label">MoMo</span>
+                            </div>
+                            <div class="method-card" id="methodCard" onclick="selectMethod('card')">
+                                <span class="icon">💳</span>
+                                <span class="label">Bank Card</span>
+                            </div>
+                            <div class="method-card" id="methodHub" onclick="selectMethod('hub')">
+                                <span class="icon">🏦</span>
+                                <span class="label">MomoHub AC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DYNAMIC FIELD -->
+                    <div class="form-group">
+                        <label id="inputLabel">Nomero ya Telefone y'uwakira</label>
+                        <input type="text" id="targetInput" placeholder="Urugero: 078XXXXXXX" required>
+                    </div>
+
+                    <!-- CARD EXTRA INPUTS -->
+                    <div class="form-group" id="cardExtraFields" style="display: none;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label>Itariki (MM/YY)</label>
+                                <input type="text" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div>
+                                <label>Secure Code (CVC)</label>
+                                <input type="password" placeholder="•••" maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AMOUNT INPUT -->
+                    <div class="form-group">
+                        <label>Amafaranga (Amount RWF)</label>
+                        <input type="number" id="payAmount" placeholder="0 RWF" min="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ibisobanuro (Memo)</label>
+                        <input type="text" placeholder="Urugero: Kwishyura fagitire...">
+                    </div>
+
+                    <!-- ACTION BUTTON -->
+                    <button type="submit" class="btn-bank" id="mainPayBtn">Ohereza Ako Kanya</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- RECENT STATEMENTS -->
+        <div class="statement-box">
+            <h3>Ibimaze gukorwa kuri Konti (Recent Transactions)</h3>
+            <table class="bank-table">
+                <thead>
+                    <tr>
+                        <th>Itariki</th>
+                        <th>Ibisobanuro</th>
+                        <th>Status</th>
+                        <th>Ayakuweho (Debit)</th>
+                        <th>Ayajyiyeho (Credit)</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                    <tr>
+                        <td colspan="5" class="no-data">Nta gikorwa na kimwe kirakorwa kuri iyi konti gihari.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- APP ENGINE LOGIC -->
+    <script>
+        let currentDirection = 'send'; 
+        let currentMethod = 'momo'; 
+
+        function toggleDirection(direction) {
+            currentDirection = direction;
+            const chipSend = document.getElementById('chipSend');
+            const chipReceive = document.getElementById('chipReceive');
+            const mainPayBtn = document.getElementById('mainPayBtn');
+            const payEngineBox = document.getElementById('payEngineBox');
+
+            if (direction === 'send') {
+                chipSend.className = 'action-chip active-send';
+                chipReceive.className = 'action-chip';
+                document.getElementById('channelLabel').innerText = "Hitamo Inzira (Payment Channel)";
+                mainPayBtn.innerText = "Ohereza Ako Kanya";
+                mainPayBtn.style.background = "linear-gradient(135deg, var(--gold) 0%, var(--gold-glow) 100%)";
+                mainPayBtn.style.color = "var(--navy-dark)";
+                payEngineBox.style.borderColor = "var(--navy-light)";
+            } else {
+                chipSend.className = 'action-chip';
+                chipReceive.className = 'action-chip active-receive';
+                document.getElementById('channelLabel').innerText = "Inzira urandukira kwakiraho";
+                mainPayBtn.innerText = "Saba Amafaranga (Request)";
+                mainPayBtn.style.background = "var(--emerald)";
+                mainPayBtn.style.color = "var(--navy-dark)";
+                payEngineBox.style.borderColor = "var(--emerald)";
+            }
+            updateFormLabels();
+        }
+
+        function selectMethod(method) {
+            currentMethod = method;
+            
+            document.getElementById('methodMomo').classList.remove('selected');
+            document.getElementById('methodCard').classList.remove('selected');
+            document.getElementById('methodHub').classList.remove('selected');
+
+            if(method === 'momo') document.getElementById('methodMomo').classList.add('selected');
+            if(method === 'card') document.getElementById('methodCard').classList.add('selected');
+            if(method === 'hub') document.getElementById('methodHub').classList.add('selected');
+
+            updateFormLabels();
+        }
+
+        function updateFormLabels() {
+            const inputLabel = document.getElementById('inputLabel');
+            const targetInput = document.getElementById('targetInput');
+            const cardExtraFields = document.getElementById('cardExtraFields');
+
+            cardExtraFields.style.display = 'none';
+
+            if (currentDirection === 'send') {
+                if (currentMethod === 'momo') {
+                    inputLabel.innerText = "Nomero ya Telefone y'uwakira (MoMo)";
+                    targetInput.placeholder = "Urugero: 078XXXXXXX";
+                } else if (currentMethod === 'card') {
+                    inputLabel.innerText = "Nomero y'Ikarita ya Banki (16-digits)";
+                    targetInput.placeholder = "4000 0000 0000 0000";
+                    cardExtraFields.style.display = 'block'; 
+                } else if (currentMethod === 'hub') {
+                    inputLabel.innerText = "Konti ID ya MomoHub (Receiver ID)";
+                    targetInput.placeholder = "Urugero: MH-XXXXX-RW";
+                }
+            } else {
+                if (currentMethod === 'momo') {
+                    inputLabel.innerText = "Nomero ya Telefone yo kwakiraho (MoMo)";
+                    targetInput.placeholder = "Injiza telefone yawe";
+                } else if (currentMethod === 'card') {
+                    inputLabel.innerText = "Nomero y'Ikarita yawe izakiraho amafaranga";
+                    targetInput.placeholder = "4000 0000 0000 0000";
+                } else if (currentMethod === 'hub') {
+                    inputLabel.innerText = "Konti ID yawe ya MomoHub yo kwakiraho";
+                    targetInput.placeholder = "MH-XXXXX-RW";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

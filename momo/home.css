@@ -1,0 +1,153 @@
+/* Iby'ibanze */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #F3F4F9; /* Amabara y'inyuma */
+    color: #333;
+}
+
+/* Dashboard Container (Ihuza Sidebar na Main Content) */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 1. SIDEBAR STYLE */
+.sidebar {
+    width: 260px;
+    background-color: #1E1B4B; /* Ibaru rya cyura/blue yijimye */
+    color: #fff;
+    padding: 30px 20px;
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: #A5B4FC;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+/* 2. MAIN CONTENT STYLE */
+.main-content {
+    flex: 1;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.header h2 {
+    color: #1E1B4B;
+}
+
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 22px;
+    color: #4F46E5;
+}
+
+/* Cards Grid (Amakarita 4 ari ku murongo) */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #6B7280;
+    margin-bottom: 10px;
+}
+
+.card .amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1E1B4B;
+}
+
+/* Transactions Section */
+.transactions-container {
+    background-color: #fff;
+    padding: 2px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    height: 650px;
+    border-radius:12px;
+}
+
+.transactions-container h3 {
+    margin-bottom: 20px;
+    color: #1E1B4B;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.transactions-table th {
+    background-color: #312E81;
+    color: white;
+    padding: 12px;
+    font-weight: 500;
+}
+
+.transactions-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+/* Status Button (Ahanditse Paid) */
+.status.paid {
+    background-color: #D1FAE5;
+    color: #065F46;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Bikuraho rya ruriba riranga iframe */
+    outline: none;
+}

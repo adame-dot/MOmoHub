@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <title>MomoHub | Premium Dashboard</title>
+    <style>
+        :root {
+            --bg-deep: #0a192f;
+            --card-bg: #112240;
+            --gold: #FFC107;
+            --text-white: #e6f1ff;
+            --text-muted: #8892b0;
+        }
+
+        body { 
+            background-color: var(--bg-deep); 
+            color: var(--text-white); 
+            font-family: 'Segoe UI', sans-serif; 
+            padding: 40px; 
+            margin: 0;
+        }
+
+        .dashboard { max-width: 1000px; margin: auto; }
+
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        
+        .table-wrapper { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { color: var(--text-muted); text-align: left; padding: 15px; border-bottom: 1px solid #233554; }
+        td { padding: 15px; border-bottom: 1px solid #233554; }
+
+        .status-pill { padding: 5px 12px; border-radius: 15px; font-size: 12px; font-weight: bold; }
+        .success { color: #64ffda; border: 1px solid #64ffda; }
+        
+        #clock { font-size: 18px; color: var(--gold); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="header">
+        <h1>MomoHub <span style="color:var(--gold)">Live</span></h1>
+        <div id="clock">Loading time...</div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Type</th><th>Amount</th><th>Status</th></tr>
+            </thead>
+            <tbody id="data-body"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // 1. Isaha y'ukuri
+    setInterval(() => {
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+    // 2. Mock Data & Auto-update
+    async function updateData() {
+        const data = [
+            { id: "MH-001", type: "Transfer", amount: "5,000 RWF", status: "SUCCESS" },
+            { id: "MH-002", type: "Payment", amount: "12,000 RWF", status: "SUCCESS" }
+        ];
+
+        const body = document.getElementById('data-body');
+        body.innerHTML = data.map(i => `
+            <tr>
+                <td>${i.id}</td>
+                <td>${i.type}</td>
+                <td>${i.amount}</td>
+                <td><span class="status-pill success">${i.status}</span></td>
+            </tr>
+        `).join('');
+
+        // 3. Sound Alert (niba hari transaction nshya)
+        const audio = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+        audio.play().catch(e => console.log("User needs to interact first"));
+    }
+
+    updateData();
+    setInterval(updateData, 10000);
+</script>
+
+</body>
+</html>
